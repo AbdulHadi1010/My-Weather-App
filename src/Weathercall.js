@@ -9,51 +9,23 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-
+import { useDispatch, useSelector } from "react-redux";
 import { BlurView } from "@react-native-community/blur";
 import LinearGradient from "react-native-linear-gradient";
 import Locgif from "./Locgif.json";
 import Lottie from "lottie-react-native";
 
-export default function Weathercall({ data }) {
-  // const apiData = {
-  //   coord: { lon: 74.2865, lat: 31.5081 },
-  //   weather: [{ id: 721, main: "Haze", description: "haze", icon: "50n" }],
-  //   base: "stations",
-  //   main: {
-  //     temp: 302.16,
-  //     feels_like: 301.29,
-  //     temp_min: 302.16,
-  //     temp_max: 302.16,
-  //     pressure: 1010,
-  //     humidity: 34,
-  //   },
-  //   visibility: 5000,
-  //   wind: { speed: 0, deg: 0 },
-  //   clouds: { all: 20 },
-  //   dt: 1682447044,
-  //   sys: {
-  //     type: 1,
-  //     id: 7585,
-  //     country: "PK",
-  //     sunrise: 1682382246,
-  //     sunset: 1682429844,
-  //   },
-  //   timezone: 18000,
-  //   id: 1170157,
-  //   name: "Model Town",
-  //   cod: 200,
-  // };
-
+export default function Weathercall() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
+  console.log("dwadwa", state.locationState)
+
+
   useEffect(() => {
-    setTimeout(() => {
-      if (data) {
-        setLoading(false);
-      } // Set loading to false after a delay
-    }, 2000);
-  }, [data]);
+
+  }, []);
 
   const tempchangertoC = (num) => {
     return Math.round(num - 273.15);
