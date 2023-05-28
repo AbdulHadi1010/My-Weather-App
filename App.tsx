@@ -1,6 +1,8 @@
+import 'react-native-gesture-handler';
+import RNBootSplash from "react-native-bootsplash";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Tabs from "./src/Tabs";
+import Navigation from "./src/Navigation";
 // import Redux
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -14,7 +16,7 @@ export default function App(): JSX.Element {
   return (
     <Provider store={store}>
     <NavigationContainer>
-      <Tabs />
+      <Navigation />
     </NavigationContainer>
     </Provider>
   );

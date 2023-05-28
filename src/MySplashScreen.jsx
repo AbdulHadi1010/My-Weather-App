@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Weathercall from "./Weathercall";
+import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { Locationfetch } from "./redux/action";
 import RNAndroidLocationEnabler from "react-native-android-location-enabler";
-import Details from "./Details";
 
-
-const Tab = createBottomTabNavigator();
-
-export default function Tabs() {
-
-  const dispatch = useDispatch();
-  const UpdateLocation = () => {
+export default function MySplashscreen() {
+    const UpdateLocation = () => {
     RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
       interval: 10000,
       fastInterval: 5000,
@@ -31,13 +24,17 @@ export default function Tabs() {
       });
   
   };
-useEffect(() => {
-UpdateLocation();
-}, []);
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Weathercall} options={{headerShown: false}}/>
-      <Tab.Screen name="Details" component={Details} options={{headerShown: false}}/>
-    </Tab.Navigator>
-  );
+ 
+  useEffect(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+      UpdateLocation();
+    };
+
+    init().finally(async () => {
+      await RNBootSplash.hide({ fade: true, duration: 500 });
+      console.log("BootSplash has been hidden successfully");
+    });
+  }, []);
+     
 }
