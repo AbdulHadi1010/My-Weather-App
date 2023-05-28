@@ -11,8 +11,8 @@ const reducer = (state = initialState, {type, ...rest}) => {
       return {...state, locationState: rest.data};
     case 'MainApiUpdate':
       return {...state, MainApiCall: rest.data};
-    case 'LocationUpdate':
-      return {...state, AirIndexApiUpdate: rest.data};
+    case 'AirIndexApiUpdate':
+      return {...state, AirIndexCall: rest.data};
     case 'FiveDayApiUpdate':
       return {...state, FiveDayApiCall: rest.data};
     default:

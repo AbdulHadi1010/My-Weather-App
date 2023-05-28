@@ -14,17 +14,26 @@ import { BlurView } from "@react-native-community/blur";
 import LinearGradient from "react-native-linear-gradient";
 import Locgif from "./Locgif.json";
 import Lottie from "lottie-react-native";
+import { callApi } from "./redux/action";
 
 export default function Weathercall() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  console.log("dwadwa", state.locationState)
-
+  const fetchCallApi = async () => {
+    await dispatch(
+      callApi({
+        location: state.locationState,
+        setLoading: () => {
+          setLoading(false);
+        },
+      }),
+    );
+  };
 
   useEffect(() => {
-
+    fetchCallApi();
   }, []);
 
   const tempchangertoC = (num) => {
@@ -66,19 +75,19 @@ export default function Weathercall() {
                 </View>
               ) : (
                 <>
-                  <Text style={styles.text1}>{data?.name}</Text>
+                  <Text style={styles.text1}>{state?.MainApiCall?.name}</Text>
                   <Text style={styles.text}>
-                    {tempchangertoC(data?.main.temp)}°
+                    {tempchangertoC(state?.MainApiCall?.main.temp)}°
                   </Text>
-                  <Text style={styles.text_grey}>{data?.weather[0].main}</Text>
+                  <Text style={styles.text_grey}>{state?.MainApiCall?.weather[0].main}</Text>
                   <View
                     style={{ flexDirection: "row", justifyContent: "center" }}
                   >
                     <Text style={styles.text2}>
-                      H:{tempchangertoC(data?.main.temp_max)}°
+                      H:{tempchangertoC(state?.MainApiCall?.main.temp_max)}°
                     </Text>
                     <Text style={styles.text2}>
-                      L:{tempchangertoC(data?.main.temp_min)}°
+                      L:{tempchangertoC(state?.MainApiCall?.main.temp_min)}°
                     </Text>
                   </View>
                 </>
