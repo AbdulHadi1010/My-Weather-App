@@ -1,5 +1,5 @@
 const initialState = {
-  locationState: [],
+  locationState: null,
   MainApiCall: [],
   AirIndexCall: [],
   FiveDayApiCall: [],

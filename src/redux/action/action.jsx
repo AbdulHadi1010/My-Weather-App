@@ -1,7 +1,7 @@
-import GetLocation from "react-native-get-location";
-import axios from "axios";
+import GetLocation from 'react-native-get-location';
+import axios from 'axios';
 
-export const Locationfetch = () => async (dispatch) => {
+export const Locationfetch = vals => async dispatch => {
   GetLocation.getCurrentPosition({
     enableHighAccuracy: true,
     timeout: 60000,
@@ -11,32 +11,35 @@ export const Locationfetch = () => async (dispatch) => {
         type: 'LocationUpdate',
         data: result,
       });
+      vals?.setNavigation();
     })
     .catch(error => {
       const {code, message} = error;
       console.warn(code, message);
     });
 };
-export const callApi = (location) => async (dispatch) => {
+export const callApi = vals => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `https://api.openweathermap.org/data/2.5/weather?lat=${location?.latitude}&lon=${location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
+    url: `https://api.openweathermap.org/data/2.5/weather?lat=${vals?.location?.latitude}&lon=${vals?.location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
     headers: {},
   };
   axios
     .request(config)
-    .then((result) => {
+    .then(result => {
       dispatch({
-        type: "MainApiUpdate",
+        type: 'MainApiUpdate',
         data: result.data,
       });
-  })
+      vals?.setLoading();
+    })
     .catch(error => {
       console.log(error);
+      vals?.setLoading();
     });
 };
-export const callAirPollution = (location) => async (dispatch) => {
+export const callAirPollution = location => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -46,17 +49,17 @@ export const callAirPollution = (location) => async (dispatch) => {
 
   axios
     .request(config)
-    .then((result) => {
+    .then(result => {
       dispatch({
-        type: "AirIndexApiUpdate",
+        type: 'AirIndexApiUpdate',
         data: result,
       });
-  })
+    })
     .catch(error => {
       console.log(error);
     });
 };
-export const callFiveDay = (location) => async (dispatch) => {
+export const callFiveDay = location => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -66,12 +69,12 @@ export const callFiveDay = (location) => async (dispatch) => {
 
   axios
     .request(config)
-    .then((result) => {
+    .then(result => {
       dispatch({
-        type: "FiveDayApiUpdate",
+        type: 'FiveDayApiUpdate',
         data: result,
       });
-  })
+    })
     .catch(error => {
       console.log(error);
     });
