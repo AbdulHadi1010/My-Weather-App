@@ -7,19 +7,19 @@ export default function NewView({ display, props }) {
   const tempchangertoC = (num) => {
     return Math.round(num - 273.15);
   }; 
-  console.log("View: ",display);
+  console.log("View: ", display?.dt);
   return (
 
       <View style={styles.container}>
         <Text style={GlobalStyles.txt}>
           {dayjs.unix(display?.dt).format("dddd, D MMMM")}
         </Text>
-        <Text style={GlobalStyles.txt}>{tempchangertoC(display?.main?.temp)}°</Text>
+        {/* <Text style={GlobalStyles.txt}>{tempchangertoC(display?.main?.temp)}°</Text>
         <Text style={GlobalStyles.txt}>
           Feels Like: {tempchangertoC(display?.main?.feels_like)}°
-        </Text>
-        <Text style={GlobalStyles.txt}>Humidity: {display?.main?.humidity}</Text>
-        <Text style={GlobalStyles.txt}>{display?.weather[0]?.description}</Text>
+        </Text> */}
+        {/* <Text style={GlobalStyles.txt}>Humidity: {display?.main?.humidity}</Text> */}
+        {/* <Text style={GlobalStyles.txt}>{display?.weather[0]?.description}</Text> */}
       </View>
   );
 }

@@ -61,7 +61,6 @@ export default function Details() {
               reducedTransparencyFallbackColor="white">
               <Text style={GlobalStyles.txt}>
                 Air Quality: {state?.AirIndexCall?.main?.aqi}
-                {console.log("rgdraz",state?.AirIndexCall?.main?.aqi)}
               </Text>
             </BlurView>
           </View>
