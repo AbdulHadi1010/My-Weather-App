@@ -37,7 +37,7 @@ export default function Details() {
   };
 
   useEffect(() => {
-    // fetchcallAirPollution();
+    fetchcallAirPollution();
   }, []);
 
   return (
