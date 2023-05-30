@@ -4,13 +4,13 @@ import LinearGradient from "react-native-linear-gradient";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat"; // Plugin for custom date parsing format
 import utc from "dayjs/plugin/utc"; // Plugin for UTC handling
-
+import Lottie from "lottie-react-native";
 import "dayjs/locale/en"; // Example: Import English locale
 import { GlobalStyles } from "./GlobalStyles";
 import NewView from "./NewView";
 import {useDispatch, useSelector} from 'react-redux';
 import { callFiveDay } from "./redux/action";
-
+import lookingdata from './lookingdata.json'
 
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
@@ -37,7 +37,7 @@ export default function FivedayForecast() {
   }
 
   useEffect(() => {
-    CallcallFiveDay();
+    // CallcallFiveDay();
     
   }, []);
 
@@ -57,7 +57,21 @@ export default function FivedayForecast() {
       style={styles.gradient}
     >
       {loading ? (
-        <Text>Loading.....</Text>
+        <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Lottie
+          style={{ width: 400, height: 400 }}
+          source={lookingdata}
+          autoPlay
+          loop
+        />
+        <Text style={GlobalStyles.Loadingtxt} >Wait while we fetch your data 😎</Text>
+      </View>
       ) : (
         <>
           <FlatList

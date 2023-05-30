@@ -7,11 +7,9 @@ import {BlurView} from '@react-native-community/blur';
 import dayjs from 'dayjs';
 import {useDispatch, useSelector} from 'react-redux';
 import {callAirPollution} from './redux/action';
+import Lottie from "lottie-react-native";
+import chicken from './chicken.json'
 
-// locationState: [],
-// MainApiCall: [],
-// AirIndexCall: [],
-// FiveDayApiCall: [],
 
 export default function Details() {
   const state = useSelector(state => state);
@@ -39,7 +37,7 @@ export default function Details() {
   };
 
   useEffect(() => {
-    fetchcallAirPollution();
+    // fetchcallAirPollution();
   }, []);
 
   return (
@@ -50,7 +48,21 @@ export default function Details() {
       locations={[0, 1]}
       style={styles.gradient}>
       {loading ? (
-        <Text>Loading...</Text>
+       <View
+       style={{
+         flex: 1,
+         alignItems: "center",
+         justifyContent: "center",
+       }}
+     >
+       <Lottie
+         style={{ height: 400 }}
+         source={chicken}
+         autoPlay
+         loop
+       />
+       <Text style={GlobalStyles.Loadingtxt} >The Chick is looking for data 🤗</Text>
+     </View>
       ) : (
         <>
           <View style={styles.mainView}>
