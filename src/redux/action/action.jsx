@@ -6,7 +6,7 @@ import axios from 'axios';
 export const Locationfetch = (vals) => async dispatch => {
   GetLocation.getCurrentPosition({
     enableHighAccuracy: true,
-    timeout: 60000,
+    timeout: 10000,
   })
     .then(result => {
       dispatch({
@@ -18,6 +18,7 @@ export const Locationfetch = (vals) => async dispatch => {
     .catch(error => {
       const {code, message} = error;
       console.warn(code, message);
+      vals?.setNavigator();
     });
 };
 export const callApi = (vals) => async dispatch => {
@@ -77,7 +78,9 @@ export const callFiveDay = vals => async dispatch => {
         type: 'FiveDayApiUpdate',
         data: result.data.list,
       });
+      vals?.setData(result.data.list);
       vals?.setLoading();
+      
     })
     .catch(error => {
       console.log(error);

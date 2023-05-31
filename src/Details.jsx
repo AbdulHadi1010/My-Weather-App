@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
-import React, {useEffect,useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {GlobalStyles} from './GlobalStyles';
 import MyView from './MyView';
@@ -7,9 +7,8 @@ import {BlurView} from '@react-native-community/blur';
 import dayjs from 'dayjs';
 import {useDispatch, useSelector} from 'react-redux';
 import {callAirPollution} from './redux/action';
-import Lottie from "lottie-react-native";
-import chicken from './chicken.json'
-
+import Lottie from 'lottie-react-native';
+import chicken from './chicken.json';
 
 export default function Details() {
   const state = useSelector(state => state);
@@ -17,13 +16,26 @@ export default function Details() {
   const [loading, setLoading] = useState(true);
 
   const data1 = [
-    { key: `Sunrise: ${dayjs.unix(state?.MainApiCall?.sys?.sunrise).format('h:mm A')}` },
-    { key: `Sunset: ${dayjs.unix(state?.MainApiCall?.sys?.sunset).format('h:mm A')}` },
-    { key: `Pressure: ${state?.MainApiCall?.main?.pressure}` },
-    { key: `Humidity: ${state?.MainApiCall?.main?.humidity}` },
-    { key: `Wind: Speed: ${state?.MainApiCall?.wind?.speed}° Degree: ${state?.MainApiCall?.wind?.deg}` },
+    {
+      string: 'Air Index:',
+      key: `${state?.AirIndexCall?.main?.aqi}`,
+    },
+    {
+      string: 'Sunrise:',
+      key: `${dayjs.unix(state?.MainApiCall?.sys?.sunrise).format('h:mm A')}`,
+    },
+    {
+      string: 'Sunset:',
+      key: `${dayjs.unix(state?.MainApiCall?.sys?.sunset).format('h:mm A')}`,
+    },
+    {string: 'Pressure:', key: `${state?.MainApiCall?.main?.pressure}`},
+    {string: 'Humidity:', key: `${state?.MainApiCall?.main?.humidity}`},
+    {
+      string: 'Wind:',
+      key: `${state?.MainApiCall?.wind?.speed} km/h`,
+    },
   ];
-  
+
   const fetchcallAirPollution = async () => {
     setLoading(true);
     await dispatch(
@@ -48,40 +60,33 @@ export default function Details() {
       locations={[0, 1]}
       style={styles.gradient}>
       {loading ? (
-       <View
-       style={{
-         flex: 1,
-         alignItems: "center",
-         justifyContent: "center",
-       }}
-     >
-       <Lottie
-         style={{ height: 400 }}
-         source={chicken}
-         autoPlay
-         loop
-       />
-       <Text style={GlobalStyles.Loadingtxt} >The Chick is looking for data 🤗</Text>
-     </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Lottie style={{height: 400}} source={chicken} autoPlay loop />
+          <Text style={GlobalStyles.Loadingtxt}>
+            The Chick is looking for data 🤗
+          </Text>
+        </View>
       ) : (
         <>
-          <View style={styles.mainView}>
-            <BlurView
-              style={GlobalStyles.absolute}
-              Type="light"
-              Amount={20}
-              reducedTransparencyFallbackColor="white">
-              <Text style={GlobalStyles.txt}>
-                Air Quality: {state?.AirIndexCall?.main?.aqi}
-              </Text>
-            </BlurView>
-          </View>
-
           <FlatList
+            contentContainerStyle={{paddingTop: 50}}
             data={data1}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <MyView
-                props={<Text style={GlobalStyles.txt}>{item.key}</Text>}
+                props={
+                  <>
+                    <Text style={styles.txt}>{item.string}</Text>
+                    <Text style={styles.keytxt}>
+                      {'\n'}
+                      {item.key}
+                    </Text>
+                  </>
+                }
               />
             )}
             numColumns={2}
@@ -104,5 +109,15 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
     paddingTop: 50,
+  },
+  txt: {
+    color: '#adacaa',
+    fontSize: 20,
+  },
+  keytxt: {
+    color: 'white',
+    fontSize: 20,
+    paddingTop: 20,
+    paddingLeft: 5,
   },
 });
