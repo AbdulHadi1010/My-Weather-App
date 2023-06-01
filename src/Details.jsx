@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {GlobalStyles} from './GlobalStyles';
@@ -17,6 +17,7 @@ export default function Details() {
 
   const data1 = [
     {
+
       string: 'Air Index:',
       key: `${state?.AirIndexCall?.main?.aqi}`,
     },
@@ -79,13 +80,13 @@ export default function Details() {
             renderItem={({item, index}) => (
               <MyView
                 props={
-                  <>
+                  <View   style={styles.cont}>
                     <Text style={styles.txt}>{item.string}</Text>
                     <Text style={styles.keytxt}>
                       {'\n'}
                       {item.key}
                     </Text>
-                  </>
+                  </View>
                 }
               />
             )}
@@ -98,6 +99,11 @@ export default function Details() {
 }
 
 const styles = StyleSheet.create({
+  cont:{
+    display: 'flex',
+    // flexDirection: 'row',
+  },
+
   mainView: {
     margin: 10,
     padding: 50,
@@ -111,13 +117,13 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   txt: {
-    color: '#adacaa',
-    fontSize: 20,
+    color: 'white',
+    opacity: 0.6,
+    fontSize: 17,
   },
   keytxt: {
     color: 'white',
-    fontSize: 20,
-    paddingTop: 20,
-    paddingLeft: 5,
+    fontSize: 15,
+    paddingTop: 10,
   },
 });
