@@ -27,33 +27,33 @@ export default function Details() {
 
   const data1 = [
     {
-      icon: myAirIcon,
-      string: 'Air Index:',
       key: `${state?.AirIndexCall?.main?.aqi} aqi`,
+      icon: myAirIcon,
+      string: 'Air Index',
     },
     {
       icon: mySunriseIcon,
-      string: 'Sunrise:',
+      string: 'Sunrise',
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunrise).format('h:mm A')}`,
     },
     {
       icon: mySunsetIcon,
-      string: 'Sunset:',
+      string: 'Sunset',
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunset).format('h:mm A')}`,
     },
     {
       icon: myPressureIcon,
-      string: 'Pressure:',
+      string: 'Pressure',
       key: `${state?.MainApiCall?.main?.pressure} atm`,
     },
     {
       icon: myHumidityIcon,
-      string: 'Humidity:',
+      string: 'Humidity',
       key: `${state?.MainApiCall?.main?.humidity} g.m-3`,
     },
     {
       icon: myWindIcon,
-      string: 'Wind:',
+      string: 'Wind',
       key: `${state?.MainApiCall?.wind?.speed} km/h`,
     },
   ];
@@ -98,19 +98,15 @@ export default function Details() {
           <FlatList
             contentContainerStyle={{paddingBottom: 70, paddingTop: 20}}
             data={data1}
-            renderItem={({item, index}) => (
+            renderItem={({item}) => (
               <MyView
                 props={
                   <>
+                    {/* <View style={styles.cont}> */}
+                      <Text style={styles.keytxt}>{item.key}</Text>
+                    {/* </View> */}
                     <View style={styles.cont}>
-                      {item.icon}
-                      <Text style={styles.txt}>{item.string}</Text>
-                    </View>
-                    <View style={styles.cont}>
-                    <Text style={styles.keytxt}>
-                      {'\n'}
-                      {item.key}
-                    </Text>
+                      <Text style={styles.txt}>{'\n'}{item.icon}  {item.string}</Text>
                     </View>
                   </>
                 }
@@ -125,7 +121,6 @@ export default function Details() {
 
 const styles = StyleSheet.create({
   cont: {
-    display: 'flex',
     flexDirection: 'row',
   },
   mainView: {
@@ -142,14 +137,12 @@ const styles = StyleSheet.create({
   txt: {
     color: 'white',
     opacity: 0.6,
-    fontSize: 30,
-    paddingLeft: 10,
-    bottom: 5,
+    fontSize: 25,
+    top: 55,
+    bottom: 0
   },
   keytxt: {
     color: 'white',
-    fontSize: 25,
-    top: 30,
-    left: 60
+    fontSize: 50,
   },
 });
