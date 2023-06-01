@@ -24,19 +24,24 @@ export default function NewView({item}) {
           {dayjs.unix(item?.dt).format('dddd, D MMMM')}
         </Text>
         <Text style={styles.temp}>{tempchangertoC(item?.main?.temp)}°</Text>
+        
         <Text style={styles.feeltxt}>
           Feels Like: {tempchangertoC(item?.main?.feels_like)}°
         </Text>
-
+        <View style={styles.row}>
         <Text style={styles.feeltxt}>Humidity: {item?.main?.humidity}</Text>
         <Text style={styles.description}>{item?.weather[0]?.description}</Text>
+        </View>
       </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-
+  row:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   datetxt: {
     color: 'white',
     fontSize: 25,
@@ -45,16 +50,18 @@ const styles = StyleSheet.create({
   description: {
     color: 'white',
     textTransform: 'capitalize',
-    fontSize: 20,
+    fontSize: 25,
+    right: 15,
   },
   container: {
     padding: 10,
     marginLeft: 20,
     marginRight: 20,
-    // borderColor: '#fff',
-    // borderWidth: 1.5,
+    backgroundColor: '#fff',
+    opacity: 1.5,
+    borderRadius: 10,
+    elevation: 10,
     borderRadius: 25,
-
     marginBottom: 20,
   },
   gradient: {
@@ -71,5 +78,6 @@ const styles = StyleSheet.create({
     color: '#aeb1b5',
     fontSize: 17,
     paddingBottom: 5,
+    left: 10
   },
 });

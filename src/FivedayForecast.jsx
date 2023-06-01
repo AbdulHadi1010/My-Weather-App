@@ -33,10 +33,10 @@ export default function FivedayForecast() {
         setData: data => {
           setMyList([
             {id: 0, value: data[7]},
-            // {id: 1, value: data[15]},
-            // {id: 2, value: data[23]},
-            // {id: 3, value: data[31]},
-            // {id: 4, value: data[39]},
+            {id: 1, value: data[15]},
+            {id: 2, value: data[23]},
+            {id: 3, value: data[31]},
+            {id: 4, value: data[39]},
           ]);
         },
       }),
@@ -68,13 +68,13 @@ export default function FivedayForecast() {
             loop
           />
           <Text style={GlobalStyles.Loadingtxt}>
-            Wait while we fetch your data{' '}
+            Wait while we fetch your data 
           </Text>
         </View>
       ) : (
         <>
           <FlatList
-          contentContainerStyle={{ paddingBottom: 60 }}
+          contentContainerStyle={{ paddingBottom: 60, paddingTop: 20 }}
             data={MyList}
             keyExtractor={item => item.id}
             renderItem={({item}) => <NewView item = {item.value}/>}
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    paddingTop: 50,
+    // paddingTop: 50,
   },
   container: {
     padding: 10,

@@ -18,18 +18,18 @@ export default function Details() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const myAirIcon = <Icon name="air" size={15} color="#fff"/>;
-  const mySunriseIcon = <Icon1 name="sunrise" size={15} color="#fff" />;
-  const mySunsetIcon = <Icon1 name="sunset" size={15} color="#fff" />;
-  const myWindIcon = <Icon1 name="wind" size={15} color="#fff" />;
-  const myHumidityIcon = <Icon2 name="water-percent" size={15} color="#fff" />;
-  const myPressureIcon = <Icon2 name="waves-arrow-up" size={15} color="#fff" />;
+  const myAirIcon = <Icon name="air" size={25} color="#fff" />;
+  const mySunriseIcon = <Icon1 name="sunrise" size={25} color="#fff" />;
+  const mySunsetIcon = <Icon1 name="sunset" size={25} color="#fff" />;
+  const myWindIcon = <Icon1 name="wind" size={25} color="#fff" />;
+  const myHumidityIcon = <Icon2 name="water-percent" size={25} color="#fff" />;
+  const myPressureIcon = <Icon2 name="waves-arrow-up" size={25} color="#fff" />;
 
   const data1 = [
     {
       icon: myAirIcon,
       string: 'Air Index:',
-      key: `${state?.AirIndexCall?.main?.aqi}`,
+      key: `${state?.AirIndexCall?.main?.aqi} aqi`,
     },
     {
       icon: mySunriseIcon,
@@ -37,19 +37,19 @@ export default function Details() {
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunrise).format('h:mm A')}`,
     },
     {
-      icon:mySunsetIcon,
+      icon: mySunsetIcon,
       string: 'Sunset:',
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunset).format('h:mm A')}`,
     },
     {
       icon: myPressureIcon,
       string: 'Pressure:',
-      key: `${state?.MainApiCall?.main?.pressure}`,
+      key: `${state?.MainApiCall?.main?.pressure} atm`,
     },
     {
       icon: myHumidityIcon,
       string: 'Humidity:',
-      key: `${state?.MainApiCall?.main?.humidity}`,
+      key: `${state?.MainApiCall?.main?.humidity} g.m-3`,
     },
     {
       icon: myWindIcon,
@@ -96,25 +96,26 @@ export default function Details() {
       ) : (
         <>
           <FlatList
-            contentContainerStyle={{paddingTop: 50}}
+            contentContainerStyle={{paddingBottom: 70, paddingTop: 20}}
             data={data1}
             renderItem={({item, index}) => (
               <MyView
                 props={
                   <>
-                    <View style={styles.cont} >
+                    <View style={styles.cont}>
                       {item.icon}
                       <Text style={styles.txt}>{item.string}</Text>
                     </View>
+                    <View style={styles.cont}>
                     <Text style={styles.keytxt}>
                       {'\n'}
                       {item.key}
                     </Text>
+                    </View>
                   </>
                 }
               />
             )}
-            numColumns={2}
           />
         </>
       )}
@@ -137,17 +138,18 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    paddingTop: 50,
   },
   txt: {
     color: 'white',
     opacity: 0.6,
-    fontSize: 17,
-    paddingLeft: 5,
+    fontSize: 30,
+    paddingLeft: 10,
+    bottom: 5,
   },
   keytxt: {
     color: 'white',
-    fontSize: 15,
-    paddingTop: 20,
+    fontSize: 25,
+    top: 30,
+    left: 60
   },
 });

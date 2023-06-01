@@ -3,9 +3,11 @@ import React from 'react';
 import {GlobalStyles} from './GlobalStyles';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function MyView({props}) {
   return (
+    
     <LinearGradient
     colors={['rgba(46, 51, 90, 0.62)', 'rgba(17, 17, 17, 0.62)']}
     start={{ x: 0, y: 0 }}
@@ -13,6 +15,7 @@ export default function MyView({props}) {
     useAngle={true}
     angle={133.66}
       style={styles.container}>
+        <TouchableOpacity>
       <BlurView
         style={styles.absolute}
         Type="light"
@@ -20,7 +23,9 @@ export default function MyView({props}) {
         reducedTransparencyFallbackColor="white">
         {props}
       </BlurView>
+      </TouchableOpacity>
     </LinearGradient>
+    
   );
 }
 
@@ -29,9 +34,9 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   container: {
-    margin: 10,
     flex: 1,
     padding: 30,
+    margin: 5,
     backgroundColor: '#2B225A',
     borderColor: '#716878',
     borderWidth: 1.5,
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
     shadowColor: '#FFFFFF',
     shadowRadius: 2,
     elevation: 2,
+
   },
   absolute: {
     overlayColor: 'transparent',
