@@ -9,29 +9,50 @@ import {useDispatch, useSelector} from 'react-redux';
 import {callAirPollution} from './redux/action';
 import Lottie from 'lottie-react-native';
 import chicken from './chicken.json';
+import Icon from 'react-native-vector-icons/Entypo';
+import Icon1 from 'react-native-vector-icons/Feather';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Details() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
+  const myAirIcon = <Icon name="air" size={15} color="#fff"/>;
+  const mySunriseIcon = <Icon1 name="sunrise" size={15} color="#fff" />;
+  const mySunsetIcon = <Icon1 name="sunset" size={15} color="#fff" />;
+  const myWindIcon = <Icon1 name="wind" size={15} color="#fff" />;
+  const myHumidityIcon = <Icon2 name="water-percent" size={15} color="#fff" />;
+  const myPressureIcon = <Icon2 name="waves-arrow-up" size={15} color="#fff" />;
+
   const data1 = [
     {
-
+      icon: myAirIcon,
       string: 'Air Index:',
       key: `${state?.AirIndexCall?.main?.aqi}`,
     },
     {
+      icon: mySunriseIcon,
       string: 'Sunrise:',
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunrise).format('h:mm A')}`,
     },
     {
+      icon:mySunsetIcon,
       string: 'Sunset:',
       key: `${dayjs.unix(state?.MainApiCall?.sys?.sunset).format('h:mm A')}`,
     },
-    {string: 'Pressure:', key: `${state?.MainApiCall?.main?.pressure}`},
-    {string: 'Humidity:', key: `${state?.MainApiCall?.main?.humidity}`},
     {
+      icon: myPressureIcon,
+      string: 'Pressure:',
+      key: `${state?.MainApiCall?.main?.pressure}`,
+    },
+    {
+      icon: myHumidityIcon,
+      string: 'Humidity:',
+      key: `${state?.MainApiCall?.main?.humidity}`,
+    },
+    {
+      icon: myWindIcon,
       string: 'Wind:',
       key: `${state?.MainApiCall?.wind?.speed} km/h`,
     },
@@ -80,13 +101,16 @@ export default function Details() {
             renderItem={({item, index}) => (
               <MyView
                 props={
-                  <View   style={styles.cont}>
-                    <Text style={styles.txt}>{item.string}</Text>
+                  <>
+                    <View style={styles.cont} >
+                      {item.icon}
+                      <Text style={styles.txt}>{item.string}</Text>
+                    </View>
                     <Text style={styles.keytxt}>
                       {'\n'}
                       {item.key}
                     </Text>
-                  </View>
+                  </>
                 }
               />
             )}
@@ -99,11 +123,10 @@ export default function Details() {
 }
 
 const styles = StyleSheet.create({
-  cont:{
+  cont: {
     display: 'flex',
-    // flexDirection: 'row',
+    flexDirection: 'row',
   },
-
   mainView: {
     margin: 10,
     padding: 50,
@@ -120,10 +143,11 @@ const styles = StyleSheet.create({
     color: 'white',
     opacity: 0.6,
     fontSize: 17,
+    paddingLeft: 5,
   },
   keytxt: {
     color: 'white',
     fontSize: 15,
-    paddingTop: 10,
+    paddingTop: 20,
   },
 });

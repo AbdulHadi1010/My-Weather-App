@@ -33,10 +33,10 @@ export default function FivedayForecast() {
         setData: data => {
           setMyList([
             {id: 0, value: data[7]},
-            {id: 1, value: data[15]},
-            {id: 2, value: data[23]},
-            {id: 3, value: data[31]},
-            {id: 4, value: data[39]},
+            // {id: 1, value: data[15]},
+            // {id: 2, value: data[23]},
+            // {id: 3, value: data[31]},
+            // {id: 4, value: data[39]},
           ]);
         },
       }),
