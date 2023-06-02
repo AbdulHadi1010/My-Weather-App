@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   description: {
     color: 'white',
     textTransform: 'capitalize',
-    fontSize: 25,
+    fontSize: 22,
     right: 15,
   },
   container: {
