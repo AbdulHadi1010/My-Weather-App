@@ -96,17 +96,18 @@ export default function Details() {
       ) : (
         <>
           <FlatList
-            contentContainerStyle={{paddingBottom: 70, paddingTop: 20}}
+            contentContainerStyle={{paddingBottom: 80, paddingTop: 20}}
             data={data1}
             renderItem={({item}) => (
               <MyView
                 props={
                   <>
-                    {/* <View style={styles.cont}> */}
-                      <Text style={styles.keytxt}>{item.key}</Text>
-                    {/* </View> */}
+                    <Text style={styles.keytxt}>{item.key}</Text>
                     <View style={styles.cont}>
-                      <Text style={styles.txt}>{'\n'}{item.icon}  {item.string}</Text>
+                      <Text style={styles.txt}>
+                        {'\n'}
+                        {item.icon} {item.string}
+                      </Text>
                     </View>
                   </>
                 }
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     fontSize: 25,
     top: 55,
-    bottom: 0
+    bottom: 0,
   },
   keytxt: {
     color: 'white',

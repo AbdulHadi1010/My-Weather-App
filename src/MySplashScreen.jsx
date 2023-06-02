@@ -1,11 +1,12 @@
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {Locationfetch} from './redux/action';
 import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
 import RNBootSplash from 'react-native-bootsplash';
 
-const image = require('../assets/images.png');
+const image = require('../assets/weathericon.png');
+const img = require('../assets/icons/logoLength.jpg');
 export default function MySplashscreen({navigation}) {
   const dispatch = useDispatch();
   const UpdateLocation = () => {
@@ -38,20 +39,37 @@ export default function MySplashscreen({navigation}) {
   }, []);
   return (
     <View style={styles.container}>
-      <ImageBackground
+      <Image
         source={image}
-        resizeMode='center'
-        style={styles.image}></ImageBackground>
+        resizeMode="center"
+        style={styles.image}/>
+        <Text style={styles.txt}>Powered By</Text>
+      <Image source={img} resizeMode="center" style={styles.image1} />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    width: 300,
+    height: '100%',
+    paddingBottom: "120%",
+  },
+  image1: {
+    flex: 1,
+    width: 200,
+    height: '100%',
+  },
+  txt: {
+    alignSelf: 'center',
+    top: 20,
+    color: 'green',
+    fontSize: 20,
   },
 });

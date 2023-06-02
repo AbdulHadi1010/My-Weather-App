@@ -74,7 +74,7 @@ export default function FivedayForecast() {
       ) : (
         <>
           <FlatList
-          contentContainerStyle={{ paddingBottom: 60, paddingTop: 20 }}
+          contentContainerStyle={{ paddingBottom: 80, paddingTop: 20 }}
             data={MyList}
             keyExtractor={item => item.id}
             renderItem={({item}) => <NewView item = {item.value}/>}
