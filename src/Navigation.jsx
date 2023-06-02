@@ -19,12 +19,11 @@ function Tabs() {
         tabBarShowLabel: false,
         tabBarStyle: [
           {
+            borderTopWidth: 0,
             position: 'absolute',
-            // bottom: 5,
-            // left: 5,
-            // right: 5,
-            // borderRadius: 15,
-            height: 65,
+            height: 70,
+            bottom: 10,
+            borderRadius: 200,
           },
           null,
         ],
@@ -38,9 +37,11 @@ function Tabs() {
               <LinearGradient
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
-                colors={["rgba(46,51,90,0.50)", "rgba(51,48,102,0.20)"]}
+                colors={['rgba(46,51,90,0.50)', 'rgba(51,48,102,0.20)']}
                 style={{
-                  height: 70,
+                  borderWidth: 1,
+                  borderColor: 'grey',
+                  height: 80,
                   borderRadius: 20,
                 }}
               />
@@ -54,20 +55,31 @@ function Tabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({focused, tintColor}) => (
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              style={{
+                top: 5,
+                paddingLeft: 10,
+                paddingRight: 10,
+                backgroundColor: focused ? '#fff' : null,
+                alignItems: 'center',
+                borderWidth: focused ? 5 : 0,
+                borderColor: focused ? '#fff' : null,
+                borderRadius: focused ? 100 : 0,
+              }}>
               <Image
                 source={require('../assets/icons/home.png')}
                 resizeMode="contain"
                 style={{
-                  width: focused ? 30 : 20,
+                  width: focused ? 25 : 20,
                   height: 40,
-                  tintColor: focused ? '#fff' : '#000',
+                  tintColor: focused ? '#000' : '#fff',
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#fff' : '#000',
-                  fontSize: focused ? 15 : 10,
+                  color: focused ? '#000' : '#fff',
+                  fontSize: focused ? 12 : 10,
+                  fontWeight: focused ? '600': '400',
                 }}>
                 HOME
               </Text>
@@ -81,20 +93,30 @@ function Tabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({focused, tintColor}) => (
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity style={{
+              top: 5,
+              paddingLeft: 10,
+              paddingRight: 10,
+              backgroundColor: focused ? '#fff' : null,
+              alignItems: 'center',
+              borderWidth: focused ? 5 : 0,
+              borderColor: focused ? '#fff' : null,
+              borderRadius: focused ? 100 : 0,
+            }}>
               <Image
                 source={require('../assets/icons/menu.png')}
                 resizeMode="contain"
                 style={{
-                  width: focused ? 30 : 20,
+                  width: focused ? 25 : 20,
                   height: 40,
-                  tintColor: focused ? '#fff' : '#000',
+                  tintColor: focused ? '#000' : '#fff',
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#fff' : '#000',
-                  fontSize: focused ? 15 : 10,
+                  color: focused ? '#000' : '#fff',
+                  fontSize: focused ? 12 : 10,
+                  fontWeight: focused ? '600': '400',
                 }}>
                 DETAILS
               </Text>
@@ -108,20 +130,30 @@ function Tabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({focused, tintColor}) => (
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity style={{
+              top: 5,
+              paddingLeft: 10,
+              paddingRight: 10,
+              backgroundColor: focused ? '#fff' : null,
+              alignItems: 'center',
+              borderWidth: focused ? 5 : 0,
+              borderColor: focused ? '#fff' : null,
+              borderRadius: focused ? 100 : 0,
+            }}>
               <Image
                 source={require('../assets/icons/clouds.png')}
                 resizeMode="contain"
                 style={{
-                  width: focused ? 30 : 20,
+                  width: focused ? 25 : 20,
                   height: 40,
-                  tintColor: focused ? '#fff' : '#000',
+                  tintColor: focused ? '#000' : '#fff',
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#fff' : '#000',
-                  fontSize: focused ? 15 : 10,
+                  color: focused ? '#000' : '#fff',
+                  fontSize: focused ? 12 : 10,
+                  fontWeight: focused ? '600': '400',
                 }}>
                 FIVE DAY
               </Text>
@@ -151,59 +183,10 @@ export default function Navigation() {
 }
 
 const styles = StyleSheet.create({
-  picture: {
-    flex: 1,
-  },
-  conatiner: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  con: {
-    width: '75%',
-    alignSelf: 'center',
-    marginTop: 100,
-  },
-  linearGradient: {
-    flex: 1,
-    borderRadius: 20,
-  },
-  bottomView: {
-    // position: "absolute",
-    bottom: 0,
-    top: '7%',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  text1: {
-    paddingTop: 10,
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 30,
-    lineHeight: 40,
-  },
-  text: {
-    color: '#fff',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontSize: 90,
-    paddingLeft: 20,
-    lineHeight: 100,
-    fontWeight: 600,
-  },
-  text2: {
-    color: '#fff',
-    fontSize: 20,
-    marginHorizontal: 5,
-    fontWeight: 600,
-  },
-  text_grey: {
-    color: '#EBEBF599',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 600,
-    lineHeight: 25,
-  },
   absolute: {
+    borderRadius: 20,
+    // borderWidth: 5,
+    // borderColor: 'white',
     overlayColor: 'transparent',
   },
 });
