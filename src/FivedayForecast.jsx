@@ -68,16 +68,16 @@ export default function FivedayForecast() {
             loop
           />
           <Text style={GlobalStyles.Loadingtxt}>
-            Wait while we fetch your data 
+            Wait while we fetch your data
           </Text>
         </View>
       ) : (
         <>
           <FlatList
-          contentContainerStyle={{ paddingBottom: 80, paddingTop: 20 }}
+            contentContainerStyle={{paddingBottom: 80, paddingTop: 20}}
             data={MyList}
             keyExtractor={item => item.id}
-            renderItem={({item}) => <NewView item = {item.value}/>}
+            renderItem={({item}) => <NewView item={item.value} />}
           />
         </>
       )}
