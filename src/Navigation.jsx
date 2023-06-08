@@ -17,9 +17,7 @@ import {
   BannerAdSize,
 } from 'react-native-google-mobile-ads';
 
-const adUnitId = __DEV__
-  ? TestIds.REWARDED
-  : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const adUnitId = TestIds.REWARDED;
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
@@ -28,12 +26,14 @@ const Tab = createBottomTabNavigator();
 
 function Tabs() {
   const [loaded, setLoaded] = useState(false);
+  const [isloading, setisloading] = useState(true);
 
   useEffect(() => {
     const unsubscribeLoaded = rewarded.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
         setLoaded(true);
+        setisloading(false);
       },
     );
     const unsubscribeEarned = rewarded.addAdEventListener(
@@ -41,18 +41,17 @@ function Tabs() {
       reward => {
         console.log('User earned reward of ', reward);
       },
-      // setLoaded(true),
     );
 
     // Start loading the rewarded ad straight away
     rewarded.load();
 
-    // Unsubscribe from events on unmount
+    // // Unsubscribe from events on unmount
     return () => {
       unsubscribeLoaded();
       unsubscribeEarned();
     };
-  }, []);
+  }, [1000]);
 
   // No advert ready to show yet
   if (!loaded) {
@@ -193,7 +192,10 @@ function Tabs() {
                   borderRadius: focused ? 100 : 0,
                 }}
                 onPress={() => {
-                  rewarded.show();
+                  if (!isloading) {
+                    rewarded.show();
+                    setisloading(true);
+                  }
                 }}>
                 <Image
                   source={require('../assets/icons/clouds.png')}
