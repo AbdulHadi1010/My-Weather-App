@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705433738483",
+    "project_id": "weatherapp-admob-1f01f",
+    "storage_bucket": "weatherapp-admob-1f01f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705433738483:android:b4a40446a23497b8ca6b86",
+        "android_client_info": {
+          "package_name": "com.myweatherapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705433738483-i41h4ou8771rn0fhaa60dlnsj1606tng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmpQt9RAOXB7be2VWZyvQQiToCTinWMCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705433738483-i41h4ou8771rn0fhaa60dlnsj1606tng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
