@@ -94,12 +94,6 @@ export default function Weathercall() {
         </View>
         <View style={styles.bottomView}>
           <Image source={require('../assets/imgs/House.png')} />
-          {/* <BlurView
-          style={styles.blur}
-          blurType="light"
-          blurAmount={20}
-          reducedTransparencyFallbackColor="white"
-        /> */}
         </View>
       </ImageBackground>
     </View>

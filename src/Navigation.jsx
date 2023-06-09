@@ -17,10 +17,13 @@ import {
   BannerAdSize,
 } from 'react-native-google-mobile-ads';
 
-const adUnitId = TestIds.REWARDED;
+const adUnitId = __DEV__
+  ? TestIds.REWARDED
+  : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
 });
 const Tab = createBottomTabNavigator();
 

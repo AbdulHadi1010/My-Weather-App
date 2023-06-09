@@ -9,12 +9,6 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './src/redux/reducers/reducer';
 import logger from 'redux-logger';
-import {
-  RewardedAd,
-  RewardedAdEventType,
-  TestIds,
-} from 'react-native-google-mobile-ads';
-import mobileAds from 'react-native-google-mobile-ads';
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 export default function App(): JSX.Element {
