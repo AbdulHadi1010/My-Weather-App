@@ -10,56 +10,60 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  RewardedAd,
-  RewardedAdEventType,
+  InterstitialAd,
+  AdEventType,
   TestIds,
   BannerAd,
   BannerAdSize,
 } from 'react-native-google-mobile-ads';
 
 const adUnitId = __DEV__
-  ? TestIds.REWARDED
+  ? TestIds.INTERSTITIAL
   : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
-const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+const BannerAdUnitID = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
   keywords: ['fashion', 'clothing'],
 });
+
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
-  const [loaded, setLoaded] = useState(false);
-  const [isloading, setisloading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(
-      RewardedAdEventType.LOADED,
+  const [interstitialLoaded, setInterstitialLoaded] = useState(false);
+  const loadInterstitial = () => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
       () => {
-        setLoaded(true);
-        setisloading(false);
-      },
-    );
-    const unsubscribeEarned = rewarded.addAdEventListener(
-      RewardedAdEventType.EARNED_REWARD,
-      reward => {
-        console.log('User earned reward of ', reward);
+        setInterstitialLoaded(true);
       },
     );
 
-    // Start loading the rewarded ad straight away
-    rewarded.load();
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setInterstitialLoaded(false);
+        interstitial.load();
+      },
+    );
 
-    // // Unsubscribe from events on unmount
+    interstitial.load();
+
     return () => {
+      unsubscribeClosed();
       unsubscribeLoaded();
-      unsubscribeEarned();
     };
-  }, [1000]);
+  };
+  useEffect(() => {
+    const unsubscribeInterstitialEvents = loadInterstitial();
 
-  // No advert ready to show yet
-  if (!loaded) {
-    return null;
-  }
+    return () => {
+      unsubscribeInterstitialEvents();
+    };
+  }, []);
 
   return (
     <View
@@ -182,7 +186,7 @@ function Tabs() {
           component={FivedayForecast}
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, tintColor}) => (
+            tabBarIcon: ({focused}) => (
               <TouchableOpacity
                 style={{
                   top: 5,
@@ -195,9 +199,8 @@ function Tabs() {
                   borderRadius: focused ? 100 : 0,
                 }}
                 onPress={() => {
-                  if (!isloading) {
-                    rewarded.show();
-                    setisloading(true);
+                  if (interstitialLoaded) {
+                    interstitial.show();
                   }
                 }}>
                 <Image
@@ -223,7 +226,7 @@ function Tabs() {
         />
       </Tab.Navigator>
       <BannerAd
-        unitId={adUnitId}
+        unitId={BannerAdUnitID}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
