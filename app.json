@@ -1,6 +1,6 @@
 {
   "name": "MyWeatherApp",
-  "displayName": "MyWeatherApp",
+  "displayName": "AccuWeatherSky",
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-9315049673582381~7603684233",
     "ios_app_id": "ca-app-pub-9315049673582381~7603684233"

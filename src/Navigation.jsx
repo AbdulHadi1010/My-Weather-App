@@ -32,39 +32,7 @@ const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
 
 const Tab = createBottomTabNavigator();
 
-function Tabs() {
-  const [interstitialLoaded, setInterstitialLoaded] = useState(false);
-  const loadInterstitial = () => {
-    const unsubscribeLoaded = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        setInterstitialLoaded(true);
-      },
-    );
-
-    const unsubscribeClosed = interstitial.addAdEventListener(
-      AdEventType.CLOSED,
-      () => {
-        setInterstitialLoaded(false);
-        interstitial.load();
-      },
-    );
-
-    interstitial.load();
-
-    return () => {
-      unsubscribeClosed();
-      unsubscribeLoaded();
-    };
-  };
-  useEffect(() => {
-    const unsubscribeInterstitialEvents = loadInterstitial();
-
-    return () => {
-      unsubscribeInterstitialEvents();
-    };
-  }, []);
-
+function Tabs(props) {
   return (
     <View
       style={{
@@ -199,9 +167,7 @@ function Tabs() {
                   borderRadius: focused ? 100 : 0,
                 }}
                 onPress={() => {
-                  if (interstitialLoaded) {
-                    interstitial.show();
-                  }
+                  props.func();
                 }}>
                 <Image
                   source={require('../assets/icons/clouds.png')}
@@ -237,6 +203,42 @@ function Tabs() {
 }
 const Stack = createStackNavigator();
 export default function Navigation() {
+  const [interstitialLoaded, setInterstitialLoaded] = useState(false);
+  const loadInterstitial = () => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setInterstitialLoaded(true);
+      },
+    );
+
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setInterstitialLoaded(false);
+        interstitial.load();
+      },
+    );
+
+    interstitial.load();
+
+    return () => {
+      unsubscribeClosed();
+      unsubscribeLoaded();
+    };
+  };
+  useEffect(() => {
+    const unsubscribeInterstitialEvents = loadInterstitial();
+
+    return () => {
+      unsubscribeInterstitialEvents();
+    };
+  }, []);
+  const interstitialAdsShow = () => {
+    if (interstitialLoaded) {
+      interstitial.show();
+    }
+  };
   return (
     <Stack.Navigator initialRouteName="splash">
       <Stack.Screen
@@ -246,9 +248,10 @@ export default function Navigation() {
       />
       <Stack.Screen
         name="Tab"
-        component={Tabs}
-        options={{headerShown: false}}
-      />
+        // component={Tabs}
+        options={{headerShown: false}}>
+        {() => <Tabs func={interstitialAdsShow} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }
