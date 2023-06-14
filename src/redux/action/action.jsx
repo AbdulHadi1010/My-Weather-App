@@ -3,7 +3,7 @@ import axios from 'axios';
 // import { useSelector } from 'react-redux';
 // const state = useSelector(state => state);
 
-export const Locationfetch = (vals) => async dispatch => {
+export const Locationfetch = vals => async dispatch => {
   GetLocation.getCurrentPosition({
     enableHighAccuracy: true,
     timeout: 10000,
@@ -21,7 +21,7 @@ export const Locationfetch = (vals) => async dispatch => {
       vals?.setNavigator();
     });
 };
-export const callApi = (vals) => async dispatch => {
+export const callApi = vals => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -41,11 +41,11 @@ export const callApi = (vals) => async dispatch => {
       console.log(error);
     });
 };
-export const callAirPollution = (vals) => async dispatch => {
+export const callAirPollution = vals => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `http://api.openweathermap.org/data/2.5/air_pollution?lat=${vals?.location?.latitude}&lon=${vals?.location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
+    url: `https://api.openweathermap.org/data/2.5/air_pollution?lat=${vals?.location?.latitude}&lon=${vals?.location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
     headers: {},
   };
 
@@ -67,7 +67,7 @@ export const callFiveDay = vals => async dispatch => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${vals?.location?.latitude}&lon=${vals?.location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
+    url: `https://api.openweathermap.org/data/2.5/forecast?lat=${vals?.location?.latitude}&lon=${vals?.location?.longitude}&appid=134bcc17ff7fbd17a3ec89f642825260`,
     headers: {},
   };
 
@@ -80,7 +80,6 @@ export const callFiveDay = vals => async dispatch => {
       });
       vals?.setData(result.data.list);
       vals?.setLoading();
-      
     })
     .catch(error => {
       console.log(error);
