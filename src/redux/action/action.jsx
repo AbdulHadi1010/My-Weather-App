@@ -56,7 +56,6 @@ export const callAirPollution = vals => async dispatch => {
         type: 'AirIndexApiUpdate',
         data: result.data.list[0],
       });
-      // console.log("wadwd", result.data.list[0])
       vals?.setLoading();
     })
     .catch(error => {

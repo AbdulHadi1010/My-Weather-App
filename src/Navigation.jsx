@@ -9,17 +9,17 @@ import {Image, View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {BlurView} from '@react-native-community/blur';
 import LinearGradient from 'react-native-linear-gradient';
-// import {
-//   InterstitialAd,
-//   AdEventType,
-//   TestIds,
-//   BannerAd,
-//   BannerAdSize,
-// } from 'react-native-google-mobile-ads';
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+  BannerAd,
+  BannerAdSize,
+} from 'react-native-google-mobile-ads';
 
 // const adUnitId = 'ca-app-pub-9315049673582381/4958846198';
 
-// const BannerAdUnitID = 'ca-app-pub-9315049673582381/2715826235';
+const BannerAdUnitID = 'ca-app-pub-9315049673582381/2715826235';
 
 // const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
 //   requestNonPersonalizedAdsOnly: true,
@@ -188,13 +188,13 @@ function Tabs(props) {
           }}
         />
       </Tab.Navigator>
-      {/* <BannerAd
-      // unitId={BannerAdUnitID}
-      // size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-      // requestOptions={{
-      //   requestNonPersonalizedAdsOnly: true,
-      // }}
-      /> */}
+      <BannerAd
+        unitId={BannerAdUnitID}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
     </View>
   );
 }
